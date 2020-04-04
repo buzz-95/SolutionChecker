@@ -125,6 +125,7 @@ public class checker{
 				new InputStreamReader(generateOp.getErrorStream()));
 			generateOp.waitFor();
 			if(generateOp.exitValue() != 0){
+				cleanUp();
 				String s = new String("");
 				while((s = error.readLine()) != null)
 					System.out.println("Runtime Error -> " + s);
