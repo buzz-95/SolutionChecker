@@ -13,8 +13,10 @@ ll xyp(ll x,ll y){
 	return (p * p) % mod;
 }
 void f(){
-while(1){return;}
-f();}
+//while(1){}
+//int a = a / (a ^ a);
+//f();
+}
 int main(){
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);

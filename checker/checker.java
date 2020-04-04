@@ -6,7 +6,7 @@ class timeMeasure implements Runnable{
 	int testcase;
 	boolean isRunning;
 	timeMeasure(double inputTimeLimit, int testcaseNum){
-		timeLimit = inputTimeLimit;
+		timeLimit = inputTimeLimit + 0.25; //0.25 seconds for safety
 		testcase = testcaseNum;
 		isRunning = true;
 	}
@@ -28,6 +28,7 @@ class timeMeasure implements Runnable{
 			}
 		}
 		if(isRunning){
+			cleanUp();
 			System.out.println("Time Limit Exceeded on testcase #" + 
 			Integer.toString(testcase));
 			System.exit(0);
@@ -38,6 +39,18 @@ class timeMeasure implements Runnable{
 			System.out.println("Time taken by testcase #" + 
 			Integer.toString(testcase) + " : " + Long.toString(timeElapsed));
 		}*/
+	}
+	public static void cleanUp(){
+		String cleanUpBash = "cleanUp.sh";
+		Process CleanUpOp;
+		try{
+			CleanUpOp = Runtime.getRuntime().exec(
+				"sh " + cleanUpBash);
+			CleanUpOp.waitFor();
+		}
+		catch(Exception e){
+			System.out.println("Exception : " + e);
+		}
 	}
 	public void kill(){
 		isRunning = false;
@@ -105,7 +118,7 @@ public class checker{
 		try{
 			generateOp = Runtime.getRuntime().exec(
 				"sh " + genOpBash + " input" + intToStr(index)
-				 + ".txt output" + intToStr(index) + ".txt");
+				 + ".txt uoutput" + intToStr(index) + ".txt");
 			BufferedReader output = new BufferedReader(
 				new InputStreamReader(generateOp.getInputStream()));
 			BufferedReader error = new BufferedReader(
@@ -145,23 +158,51 @@ public class checker{
 				System.out.println("AC on testcase #" + Integer.toString(index));
 				return;
 			}
-			System.out.println("WA on testcase #" + Integer.toString(index));
-			System.exit(0);
+			else if(verdict.equals("WA")){
+				System.out.println("WA on testcase #" + Integer.toString(index));
+				System.exit(0);
+			}
+			else{
+				System.out.println("Something's wrong! Contact buzz-95 for this");	
+				System.exit(0);
+			}
+		}
+		catch(Exception e){
+			System.out.println("Exception : " + e);
+		}
+	}
+	public static void cleanUp(){
+		String cleanUpBash = "cleanUp.sh";
+		Process CleanUpOp;
+		try{
+			CleanUpOp = Runtime.getRuntime().exec(
+				"sh " + cleanUpBash);
+			CleanUpOp.waitFor();
 		}
 		catch(Exception e){
 			System.out.println("Exception : " + e);
 		}
 	}
 	public static void main(String args[]){
-		compile();
+		if(args.length > 2 || args.length <= 0){
+			System.out.println("Command Line Arguments Count Error");
+			return;
+		}
+		else if(args.length == 2){
+			if(args[1].equals("wC")){
+				compile();
+			}
+		}
+		double timeLimit = Double.parseDouble(args[0]);
 		int numOfTestcases = findNumOfTestcases();
 		for(int i = 0;i < numOfTestcases;i++){
-			timeMeasure tM = new timeMeasure(1,i);
+			timeMeasure tM = new timeMeasure(timeLimit,i);
 			Thread thr = new Thread(tM);
 			thr.start();
 			generateOpFor(i);
 			tM.kill();
 			checkOutputFor(i);
+			cleanUp();
 		}
 		System.out.println("AC on all the testcases");
 	}
