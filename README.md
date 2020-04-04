@@ -20,7 +20,7 @@ Verdicts?
 4. RE (Segmentation Fault,Floating Point Exception)
 
 A peaceful working of it 
-<pre><font color="#55FF55"><b>silver_buzz@PC</b></font>:<font color="#5555FF"><b>~/checker/checker</b></font>$ java checker 1 wC
+<pre><font color="#55FF55"><b>silver_buzz@PC</b></font>:<font color="#5555FF"><b>~/checker</b></font>$ java checker 1 wC
 Successful Compilation
 AC on testcase #0
 AC on testcase #1
