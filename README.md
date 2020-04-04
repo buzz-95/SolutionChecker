@@ -1,5 +1,5 @@
 # SolutionChecker
-This is a solution checker I use often, what about making it public?
+This is a solution checker I use often, how about making it public?
 
 How to use it?
 1. add the solution in a.cpp (Note: Please do not write return statement in your main function of your solution "a.cpp")
