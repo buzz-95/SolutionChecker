@@ -6,7 +6,7 @@ class timeMeasure implements Runnable{
 	int testcase;
 	boolean isRunning;
 	timeMeasure(double inputTimeLimit, int testcaseNum){
-		timeLimit = inputTimeLimit + 0.25; //0.25 seconds for safety
+		timeLimit = (inputTimeLimit + 0.25) * 1000; //0.25 seconds for safety
 		testcase = testcaseNum;
 		isRunning = true;
 	}
