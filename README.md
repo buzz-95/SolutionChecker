@@ -1,6 +1,8 @@
 # SolutionChecker
 This is a solution checker I use often, how about making it public?
 
+Please do "javac checker.java" first as soon as you clone or download this repo!!!
+
 How to use it?
 1. add the solution in a.cpp (Note: Please do not write return statement in your main function of your solution "a.cpp")
 2. add the input testcases in checker/input/ folder (Note: Use of fixed format: input00.txt,input01.txt,...)
